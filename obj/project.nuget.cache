@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "TfablCk85Ek=",
+  "dgSpecHash": "2RsIqzA1vw4=",
   "success": true,
   "projectFilePath": "C:\\Users\\maria\\Desktop\\all\\programacao\\criptoAPI\\criptoAPI.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\maria\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.8\\microsoft.aspnetcore.openapi.9.0.8.nupkg.sha512",
+    "C:\\Users\\maria\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
   "logs": []
 }
