@@ -1,6 +1,24 @@
 @criptoAPI_HostAddress = http://localhost:5168
-
-GET {{criptoAPI_HostAddress}}/weatherforecast/
 Accept: application/json
+
+###  Encrypt 
+POST {{criptoAPI_HostAddress}}/api/encrypt
+Content-Type: application/json
+
+{
+  "message": "mariana",
+  "key": "secreto"
+}
+
+###
+
+### Decrypt 
+POST {{criptoAPI_HostAddress}}/api/decrypt
+Content-Type: application/json
+
+{
+  "message": "",
+  "key": "secreto"
+}
 
 ###
