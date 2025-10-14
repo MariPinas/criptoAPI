@@ -1,0 +1,12 @@
+[Bb]in/
+[Oo]bj/
+
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.[Cc]ache
+
+Thumbs.db
+/publish
