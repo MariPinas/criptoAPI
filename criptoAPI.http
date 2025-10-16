@@ -6,8 +6,8 @@ POST {{criptoAPI_HostAddress}}/api/encrypt
 Content-Type: application/json
 
 {
-  "message": "paçocademelo",
-  "key": "secretsecret"
+  "message": "curioso",
+  "key": "secreto"
 }
 
 ###
@@ -17,8 +17,8 @@ POST {{criptoAPI_HostAddress}}/api/decrypt
 Content-Type: application/json
 
 {
-  "message": "AwSEHQYVFwAOFwkb",
-  "key": "paçocademelo"
+  "message": "00010000000100000001000100011011000010100000011100000000",
+  "key": "secreto"
 }
 
 ###

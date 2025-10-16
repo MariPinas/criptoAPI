@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using System.Linq;
 
 namespace criptoAPI.Services
 {
@@ -10,28 +11,47 @@ namespace criptoAPI.Services
             if (plaintext.Length != key.Length)
                 throw new ArgumentException("Texto e chave precisam ter o mesmo tamanho.");
 
-            byte[] result = new byte[plaintext.Length];
+            byte[] plaintextBytes = Encoding.UTF8.GetBytes(plaintext);
+            byte[] keyBytes = Encoding.UTF8.GetBytes(key);
+            byte[] result = new byte[plaintextBytes.Length];
 
-            for (int i = 0; i < plaintext.Length; i++)
+            for (int i = 0; i < plaintextBytes.Length; i++)
             {
-                result[i] = (byte)(plaintext[i] ^ key[i]);
+                result[i] = (byte)(plaintextBytes[i] ^ keyBytes[i]);
             }
 
-            return Convert.ToBase64String(result);
+            var binaryString = string.Join("", result.Select(b => Convert.ToString(b, 2).PadLeft(8, '0')));
+
+            return binaryString;
         }
 
-        public string Decrypt(string ciphertext, string key)
+        public string Decrypt(string binaryCipherText, string key)
         {
-            byte[] cypherBytes = Convert.FromBase64String(ciphertext);
-            if (cypherBytes.Length != key.Length)
-                throw new ArgumentException("Cypher e chave precisam ter o mesmo tamanho.");
+            if (binaryCipherText.Length % 8 != 0)
+                throw new ArgumentException("Texto cifrado inválido. Deve ser múltiplo de 8 bits.");
 
-            char[] result = new char[cypherBytes.Length];
-            for (int i = 0; i < cypherBytes.Length; i++)
+            int byteCount = binaryCipherText.Length / 8;
+            byte[] cipherBytes = new byte[byteCount];
+
+            for (int i = 0; i < byteCount; i++)
             {
-                result[i] = (char)(cypherBytes[i] ^ key[i]);
+                string byteString = binaryCipherText.Substring(i * 8, 8);
+                cipherBytes[i] = Convert.ToByte(byteString, 2);
             }
-            return new string(result);
+
+            byte[] keyBytes = Encoding.UTF8.GetBytes(key);
+
+            if (cipherBytes.Length != keyBytes.Length)
+                throw new ArgumentException("Texto e chave precisam ter o mesmo tamanho.");
+
+            byte[] result = new byte[cipherBytes.Length];
+
+            for (int i = 0; i < cipherBytes.Length; i++)
+            {
+                result[i] = (byte)(cipherBytes[i] ^ keyBytes[i]);
+            }
+
+            return Encoding.UTF8.GetString(result);
         }
     }
 }
