@@ -1,26 +1,29 @@
 using System;
 using System.Text;
 
-public class VernamService
+namespace criptoAPI.Services
 {
-    public string Encrypt(string plaintext, string key)
+    public class VernamService
     {
-        if (plaintext.Length != key.Length)
-            throw new ArgumentException("Texto e chave precisam ter o mesmo tamanho.");
-
-        StringBuilder ciphertext = new StringBuilder(plaintext.Length);
-
-        for (int i = 0; i < plaintext.Length; i++)
+        public string Encrypt(string plaintext, string key)
         {
-            char encryptedChar = (char)(plaintext[i] ^ key[i]);
-            ciphertext.Append(encryptedChar);
+            if (plaintext.Length != key.Length)
+                throw new ArgumentException("Texto e chave precisam ter o mesmo tamanho.");
+
+            StringBuilder ciphertext = new StringBuilder(plaintext.Length);
+
+            for (int i = 0; i < plaintext.Length; i++)
+            {
+                char encryptedChar = (char)(plaintext[i] ^ key[i]);
+                ciphertext.Append(encryptedChar);
+            }
+
+            return ciphertext.ToString();
         }
 
-        return ciphertext.ToString();
-    }
-
-    public string Decrypt(string ciphertext, string key)
-    {
-        return Encrypt(ciphertext, key); // A operação e a mesma
+        public string Decrypt(string ciphertext, string key)
+        {
+            return Encrypt(ciphertext, key); // A operação e a mesma
+        }
     }
 }

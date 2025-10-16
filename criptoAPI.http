@@ -17,7 +17,7 @@ POST {{criptoAPI_HostAddress}}/api/decrypt
 Content-Type: application/json
 
 {
-  "message": "",
+  "message": "\u001E\u0004\u0011\u001B\u0004\u001A\u000E",
   "key": "secreto"
 }
 
