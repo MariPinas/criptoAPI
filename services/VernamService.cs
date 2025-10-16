@@ -10,20 +10,28 @@ namespace criptoAPI.Services
             if (plaintext.Length != key.Length)
                 throw new ArgumentException("Texto e chave precisam ter o mesmo tamanho.");
 
-            StringBuilder ciphertext = new StringBuilder(plaintext.Length);
+            byte[] result = new byte[plaintext.Length];
 
             for (int i = 0; i < plaintext.Length; i++)
             {
-                char encryptedChar = (char)(plaintext[i] ^ key[i]);
-                ciphertext.Append(encryptedChar);
+                result[i] = (byte)(plaintext[i] ^ key[i]);
             }
 
-            return ciphertext.ToString();
+            return Convert.ToBase64String(result);
         }
 
         public string Decrypt(string ciphertext, string key)
         {
-            return Encrypt(ciphertext, key); // A operação e a mesma
+            byte[] cypherBytes = Convert.FromBase64String(ciphertext);
+            if (cypherBytes.Length != key.Length)
+                throw new ArgumentException("Cypher e chave precisam ter o mesmo tamanho.");
+
+            char[] result = new char[cypherBytes.Length];
+            for (int i = 0; i < cypherBytes.Length; i++)
+            {
+                result[i] = (char)(cypherBytes[i] ^ key[i]);
+            }
+            return new string(result);
         }
     }
 }
