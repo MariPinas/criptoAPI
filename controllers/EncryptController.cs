@@ -7,11 +7,11 @@ namespace criptoAPI.Controllers
     [ApiController]
 
     [Route("api/[controller]")]
-    public class EncryptController : ControllerBase
+    public class CifrarController : ControllerBase
     {
         private readonly VernamService _vernamService;
 
-        public EncryptController(VernamService encryptService)
+        public CifrarController(VernamService encryptService)
         {
             _vernamService = encryptService;
         }
@@ -21,7 +21,7 @@ namespace criptoAPI.Controllers
         {
             try
             {
-                var encryptedMessage = _vernamService.Encrypt(data.Message, data.Key);
+                var encryptedMessage = _vernamService.Encrypt(data.textoClaro, data.chave);
                 var response = new EncryptResponseDto { Encrypted = encryptedMessage };
                 return Ok(response);
             }

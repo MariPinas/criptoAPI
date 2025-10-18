@@ -6,11 +6,11 @@ namespace criptoAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class DecryptController : ControllerBase
+    public class DecifrarController : ControllerBase
     {
         private readonly VernamService _vernamService;
 
-        public DecryptController(VernamService decryptService)
+        public DecifrarController(VernamService decryptService)
         {
             _vernamService = decryptService;
         }
@@ -20,7 +20,7 @@ namespace criptoAPI.Controllers
         {
             try
             {
-                var decryptedMessage = _vernamService.Decrypt(data.Message, data.Key);
+                var decryptedMessage = _vernamService.Decrypt(data.textoClaro, data.chave);
 
                 var response = new DecryptResponseDto { Decrypted = decryptedMessage };
                 return Ok(response);
